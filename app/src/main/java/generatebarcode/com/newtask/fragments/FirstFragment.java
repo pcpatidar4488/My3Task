@@ -6,10 +6,7 @@ import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.Drawable;
 import android.net.Uri;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.view.LayoutInflater;
@@ -19,12 +16,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.Toast;
-
-import com.bumptech.glide.load.resource.bitmap.GlideBitmapDrawable;
-import com.github.chrisbanes.photoview.PhotoView;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -52,7 +44,7 @@ public class FirstFragment extends Fragment {
     ImageView mImage;
     Button mBrowseImage;
     Button mUploadImage;
-    FrameLayout mFrameLayout;
+    FrameLayout mConstraintLayout;
     private Uri imageToUploadUri;
     public static Bitmap photo;
     public static String encodedString = "";
@@ -63,7 +55,7 @@ public class FirstFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        view = inflater.inflate(R.layout.fragment_first, container, false);
+        view = inflater.inflate(R.layout.test_fragment_first, container, false);
         mCheckbox = view.findViewById(R.id.checkbox);
         mCheckbox1 = view.findViewById(R.id.checkbox1);
         mCheckbox2 = view.findViewById(R.id.checkbox2);
@@ -71,7 +63,7 @@ public class FirstFragment extends Fragment {
         mImage = view.findViewById(R.id.image);
         mBrowseImage = view.findViewById(R.id.brows_image);
         mUploadImage = view.findViewById(R.id.upload_image);
-        mFrameLayout = view.findViewById(R.id.frameLayout);
+        mConstraintLayout = view.findViewById(R.id.frameLayout);
         mCheckbox.bringToFront();
         mCheckbox1.bringToFront();
         mCheckbox2.bringToFront();
@@ -98,12 +90,12 @@ public class FirstFragment extends Fragment {
         }
         if (photo != null) {
             mImage.setImageBitmap(photo);
-        }else {
+        }/*else {
             Drawable dr = ((ImageView) mImage).getDrawable();
             Bitmap bitmap = ((BitmapDrawable) dr.getCurrent()).getBitmap();
             photo = bitmap;
             encodedString = Helpers.bitmapToBase64(bitmap);
-        }
+        }*/
 
         mCheckbox.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -178,7 +170,7 @@ public class FirstFragment extends Fragment {
                         ApiCallServices.action(getActivity(), Cv.ACTION_IMAGE_SEND);
                         mProgressDialog.show();
                     }else {
-                        Snackbar snackbar1 = Snackbar.make(mFrameLayout, "Please Check your internet connection...!!!", Snackbar.LENGTH_SHORT);
+                        Snackbar snackbar1 = Snackbar.make(mConstraintLayout, "Please Check your internet connection...!!!", Snackbar.LENGTH_SHORT);
                     }
 
                 }else {
